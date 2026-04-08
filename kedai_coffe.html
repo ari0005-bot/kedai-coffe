@@ -7,12 +7,14 @@
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;600;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
 
   <style>
     body {
-      font-family: 'Poppins', sans-serif;
+      font-family: 'Montserrat', sans-serif;
       scroll-behavior: smooth;
-      background-color: #976634;
+      background: linear-gradient(135deg, #976634 0%, #6b4423 100%);
+      min-height: 100vh;
     }
     .navbar {
       background-color: #2f1b0c;
@@ -21,7 +23,7 @@
       color: #f8e6d0 !important;
     }
     .hero {
-      background: url('https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=1950&q=80') center/cover no-repeat;
+      background: url('https://images.unsplash.com/photo-1511920170033-f8396924c348?auto=format&fit=crop&w=1950&q=80') center/cover fixed no-repeat;
       height: 100vh;
       display: flex;
       align-items: center;
@@ -29,44 +31,89 @@
       color: white;
       text-align: center;
       position: relative;
+      overflow: hidden;
     }
-    .hero::after {
+    .hero::before {
       content: "";
       position: absolute;
       inset: 0;
-      background-color: rgba(0, 0, 0, 0.55);
+      background: linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(151,102,52,0.6) 50%, rgba(0,0,0,0.8) 100%);
+      z-index: 1;
     }
     .hero-content {
       position: relative;
       z-index: 2;
+      animation: fadeInUp 1.5s ease-out;
+    }
+    .hero h1 {
+      font-family: 'Playfair Display', serif;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+      letter-spacing: -1px;
+    }
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(50px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+    .menu-card {
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border: none;
+      overflow: hidden;
+    }
+    .menu-card:hover {
+      transform: translateY(-10px) scale(1.02);
+      box-shadow: 0 20px 40px rgba(0,0,0,0.2);
     }
     .menu-card img {
       border-radius: 15px;
       height: 250px;
       object-fit: cover;
-      transition: transform 0.3s;
+      transition: all 0.4s ease;
     }
-    .menu-card img:hover {
-      transform: scale(1.05);
+    .menu-card:hover img {
+      transform: scale(1.1);
+      filter: brightness(1.1);
     }
     .testimonial-card {
-      background-color: white;
+      background: linear-gradient(135deg, #ffffff 0%, #f8f9fa 100%);
       padding: 30px;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+      border-radius: 20px;
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
       height: 100%;
+      transition: all 0.3s ease;
+      border: 1px solid rgba(151, 102, 52, 0.1);
+    }
+    .testimonial-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 15px 40px rgba(151, 102, 52, 0.2);
     }
     .testimonial-card i {
       color: #ffc107;
     }
+    .gallery-item {
+        position: relative;
+        overflow: hidden;
+        border-radius: 15px;
+        transition: all 0.4s ease;
+    }
     .gallery-item img, .gallery-item .ratio {
-        border-radius: 10px;
-        transition: opacity 0.3s;
+        border-radius: 15px;
+        transition: all 0.4s ease;
         height: 300px;
         object-fit: cover;
     }
+    .gallery-item:hover {
+        transform: scale(1.05);
+        box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+    }
     .gallery-item:hover img {
-        opacity: 0.8;
+        transform: scale(1.1);
+        filter: brightness(1.2);
     }
 
     .contact-form-container {
@@ -120,6 +167,64 @@
     .whatsapp-float a:hover {
         transform: scale(1.1);
     }
+    .filter-btn {
+      background: linear-gradient(135deg, #ffc107 0%, #ff9800 100%);
+      border: none;
+      color: #2f1b0c;
+      font-weight: 600;
+      padding: 10px 20px;
+      border-radius: 25px;
+      transition: all 0.3s ease;
+      margin: 5px;
+    }
+    .filter-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 5px 15px rgba(255, 193, 7, 0.4);
+    }
+    .filter-btn.active {
+      background: linear-gradient(135deg, #2f1b0c 0%, #6b4423 100%);
+      color: #ffc107;
+    }
+    .cart-counter {
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background: #ff4757;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 12px;
+      font-weight: bold;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.1); }
+      100% { transform: scale(1); }
+    }
+    .cart-icon {
+      position: relative;
+      cursor: pointer;
+      transition: color 0.3s ease;
+    }
+    .cart-icon:hover {
+      color: #ffc107 !important;
+    }
+    .btn-sm-custom {
+      padding: 6px 12px;
+      font-size: 0.875rem;
+      border-radius: 6px;
+    }
+    .menu-card .btn {
+      transition: all 0.3s ease;
+    }
+    .menu-card .btn:hover {
+      transform: translateY(-2px);
+    }
   </style>
 </head>
 
@@ -139,7 +244,17 @@
           <li class="nav-item"><a class="nav-link" href="#contact-us">Kontak</a></li>
           <li class="nav-item"><a class="nav-link" href="#orders">Pesanan</a></li>
         </ul>
-        <a href="login.html" class="btn btn-warning btn-sm ms-lg-3 mt-2 mt-lg-0 fw-bold">Login</a>
+        <div id="userDisplay" class="d-none">
+          <span class="text-white me-2">👤 <span id="usernameDisplay"></span></span>
+          <button id="logoutBtn" class="btn btn-outline-danger btn-sm ms-2">Logout</button>
+        </div>
+        <div id="loginBtn">
+          <div class="cart-icon text-white fs-5 ms-lg-3 mt-2 mt-lg-0" data-bs-toggle="modal" data-bs-target="#loginRequiredModal">
+            <i class="bi bi-cart3"></i>
+            <span class="cart-counter" id="cartCounter">0</span>
+          </div>
+          <a href="login.html" class="btn btn-warning btn-sm ms-lg-3 mt-2 mt-lg-0 fw-bold">Login</a>
+        </div>
       </div>
     </div>
   </nav>
@@ -159,333 +274,94 @@
 
   <section id="menu" class="py-5">
     <div class="container">
-      <h2 class="text-center fw-bold mb-5" data-aos="fade-up">Menu Kami📋</h2>
+      <h2 class="text-center fw-bold mb-4" data-aos="fade-up">Menu Kami📋</h2>
+      <div class="text-center mb-5" data-aos="fade-up" data-aos-delay="100">
+        <button class="filter-btn active" data-filter="all">Semua</button>
+        <button class="filter-btn" data-filter="coffee">Kopi</button>
+        <button class="filter-btn" data-filter="noncoffee">Non-Kopi</button>
+        <button class="filter-btn" data-filter="food">Makanan</button>
+      </div>
       <div class="row g-4">
-         <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
+         <div class="col-md-4 menu-item" data-category="coffee" data-aos="zoom-in" data-aos-delay="100">
           <div class="card menu-card border-0 shadow">
             <img src="img/MODA Latte.jpeg" class="card-img-top" alt="Latte">
             <div class="card-body text-center">
               <h5 class="card-title">MODA Latte</h5>
               <p class="text-muted">Espresso lembut dengan susu steamed creamy khas MODA.</p>
               <span class="fw-bold text-warning d-block mb-3">Rp 28.000</span>
-              <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#orderModal" data-item="MODA Latte">Pesan</button>
+              <div class="d-flex gap-1 justify-content-center">
+                <button class="btn btn-outline-warning btn-sm-custom add-to-cart" data-item="MODA Latte" data-price="28000">Keranjang</button>
+                <button class="btn btn-warning btn-sm-custom order-direct" data-bs-toggle="modal" data-bs-target="#orderModal" data-item="MODA Latte" data-price="28000">Pesan</button>
+              </div>
             </div>
           </div>
-        </div>
-         <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
-          <div class="card menu-card border-0 shadow">
-            <img src="img/Caramel Breeze.jpeg" class="card-img-top" alt="Latte">
-            <div class="card-body text-center">
-              <h5 class="card-title">Caramel Breeze</h5>
-              <p class="text-muted">Espresso, susu, dan sirup karamel premium.</p>
-              <span class="fw-bold text-warning d-block mb-3">Rp 28.000</span>
-              <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#orderModal" data-item="Caramel Breeze">Pesan</button>
-            </div>
-          </div>
-        </div>
-         <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
-          <div class="card menu-card border-0 shadow">
-            <img src="img/Hazelnut Bliss.jpeg" class="card-img-top" alt="Latte">
-            <div class="card-body text-center">
-              <h5 class="card-title">Hazelnut Bliss</h5>
-              <p class="text-muted">Kopi susu dengan aroma hazelnut yang hangat dan manis.</p>
-              <span class="fw-bold text-warning d-block mb-3">Rp 30.000</span>
-              <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#orderModal" data-item="Hazelnut Bliss">Pesan</button>
-            </div>
-          </div>
-        </div>
-         <div class="col-md-4" data-aos="zoom-in" data-aos-delay="400">
-          <div class="card menu-card border-0 shadow">
-            <img src="img/Black Aroma.jpeg" class="card-img-top" alt="">
-            <div class="card-body text-center">
-              <h5 class="card-title">Black Aroma</h5>
-              <p class="text-muted">Espresso hitam klasik dengan aroma roasted bold</p>
-              <span class="fw-bold text-warning d-block mb-3">Rp 32.000</span>
-              <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#orderModal" data-item="Black Aroma">Pesan</button>
-            </div>
-          </div>
-        </div>
-         <div class="col-md-4" data-aos="zoom-in" data-aos-delay="500">
-          <div class="card menu-card border-0 shadow">
-            <img src="img/Cold Brew Coffee Recipe PDF Printable Download Strong Iced Coffee Guide Digital Recipe for Coffee Lovers Summer Drink Idea Instant Download - Etsy.jpeg" class="card-img-top" alt="">
-            <div class="card-body text-center">
-              <h5 class="card-title">Cold Brew Classic</h5>
-              <p class="text-muted">Sederhana tapi berkarakter — Cold Brew Classic untuk jiwa yang tenang dan fokus.</p>
-              <span class="fw-bold text-warning d-block mb-3">Rp 25.000</span>
-              <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#orderModal" data-item="Cold Brew Classic">Pesan</button>
-            </div>
-          </div>
-        </div>
-         <div class="col-md-4" data-aos="zoom-in" data-aos-delay="600">
-          <div class="card menu-card border-0 shadow">
-            <img src="img/matcha.jpeg" class="card-img-top" alt="">
-            <div class="card-body text-center">
-              <h5 class="card-title">Matcha Latte</h5>
-              <p class="text-muted">Matcha premium dengan susu hangat yang menenangkan.</p>
-              <span class="fw-bold text-warning d-block mb-3">Rp 25.000</span>
-              <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#orderModal" data-item="Matcha Latte">Pesan</button>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="600">
-          <div class="card menu-card border-0 shadow">
-            <img src="img/Cheesecake 😋.jpeg" class="card-img-top" alt="">
-            <div class="card-body text-center">
-              <h5 class="card-title">CheeseCake</h5>
-              <p class="text-muted">Kue keju lembut dengan lapisan biskuit renyah.</p>
-              <span class="fw-bold text-warning d-block mb-3">Rp 25.000</span>
-              <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#orderModal" data-item="CheeseCake">Pesan</button>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="600">
-          <div class="card menu-card border-0 shadow">
-            <img src="img/Purple Taro Latte Recipe.jpeg" class="card-img-top" alt="">
-            <div class="card-body text-center">
-              <h5 class="card-title">Purple Taro Latte</h5>
-              <p class="text-muted">Taro dengan krim susu manis, tanpa kopi (non-coffee).</p>
-              <span class="fw-bold text-warning d-block mb-3">Rp 25.000</span>
-              <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#orderModal" data-item="Purple Taro Latte">Pesan</button>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="600">
-          <div class="card menu-card border-0 shadow">
-            <img src="img/Buttery Croissant with Berries & Almonds 🥐✨.jpeg" class="card-img-top" alt="">
-            <div class="card-body text-center">
-              <h5 class="card-title">Buttery Croissant</h5>
-              <p class="text-muted">Croissant klasik yang renyah di luar, lembut di dalam.</p>
-              <span class="fw-bold text-warning d-block mb-3">Rp 25.000</span>
-              <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#orderModal" data-item="Buttery Croissant">Pesan</button>
-            </div>
-          </div>
-        </div>
-         <div class="col-md-4" data-aos="zoom-in" data-aos-delay="600">
-          <div class="card menu-card border-0 shadow">
-            <img src="img/Fudgy Vegan Brownies_ Rich & Chewy Chocolate Bliss - The Vegan & Plant Based Kitchen.jpeg" class="card-img-top" alt="">
-            <div class="card-body text-center">
-              <h5 class="card-title">Brownies</h5>
-              <p class="text-muted">Kue coklat padat dan fudgy.</p>
-              <span class="fw-bold text-warning d-block mb-3">Rp 25.000</span>
-              <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#orderModal" data-item="Brownies">Pesan</button>
-            </div>
-          </div>
-        </div>
-         <div class="col-md-4" data-aos="zoom-in" data-aos-delay="600">
-          <div class="card menu-card border-0 shadow">
-            <img src="img/Spaghetti Aglio e Olio_ A Classic Italian Pasta Recipe.jpeg" class="card-img-top" alt="">
-            <div class="card-body text-center">
-              <h5 class="card-title">Spaghetti</h5>
-              <p class="text-muted">Spaghetti Aglio Olio dengan pedas yang pas.</p>
-              <span class="fw-bold text-warning d-block mb-3">Rp 35.000</span>
-              <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#orderModal" data-item="Spaghetti">Pesan</button>
-            </div>
-          </div>
-        </div>
-         <div class="col-md-4" data-aos="zoom-in" data-aos-delay="600">
-          <div class="card menu-card border-0 shadow">
-            <img src="img/fress.jpeg" class="card-img-top" alt="">
-            <div class="card-body text-center">
-              <h5 class="card-title">Potato</h5>
-              <p class="text-muted">Kentang goreng renyah dengan bumbu spesial.</p>
-              <span class="fw-bold text-warning d-block mb-3">Rp 22.000</span>
-              <button class="btn btn-outline-warning" data-bs-toggle="modal" data-bs-target="#orderModal" data-item="Potato">Pesan</button>
-            </div>
-          </div>
-        </div>
-         </div>
-  </section>
-
-  <section id="about" class="py-5 bg-light">
-    <div class="container">
-      <div class="row align-items-center">
-        <div class="col-md-6" data-aos="fade-right">
-          <img src="img/DSC00021.JPG" alt="about" class="img-fluid rounded-4 shadow">
-        </div>
-        <div class="col-md-6" data-aos="fade-left">
-          <h2 class="fw-bold mb-3">Tentang Kami</h2>
-          <p>Kami menghadirkan rasa kopi terbaik dari biji pilihan nusantara. **Nōma Coffi Bar** bukan sekadar kedai kopi, tapi ruang hangat untuk berbagi cerita dan inspirasi.</p>
-          <p>Setiap cangkir disajikan dengan cinta dan ketelitian, agar setiap tegukan menghadirkan ketenangan di tengah hiruk pikuk hari.</p>
-        </div>
       </div>
     </div>
   </section>
 
-  <section id="gallery" class="py-5">
-    <div class="container">
-      <h2 class="text-center fw-bold mb-5 text-white" data-aos="fade-up">📸 Galeri Kami</h2>
-      <div class="row g-4">
-
-        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="100">
-          <figure class="gallery-item text-center">
-            <img src="img/DSC00133.JPG" class="img-fluid w-100" alt="Foto CEO Noma Coffi Bar">
-            <figcaption class="mt-2 text-white fw-bold"></figcaption>
-            <figcaption class="text-white-50 small">Ry & jriy</figcaption>
-          </figure>
+  <div class="modal fade" id="loginRequiredModal" tabindex="-1">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-warning">
+          <h5 class="modal-title">🔐 Login Diperlukan</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
         </div>
-
-        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="200">
-          <figure class="gallery-item text-center">
-            <img src="img/caffe.jpeg" class="img-fluid w-100" alt="Suasana Interior Kafe">
-            <figcaption class="mt-2 text-white fw-bold">Suasana Nyaman Kafe</figcaption>
-            <figcaption class="text-white-50 small">Spot terbaik untuk bersantai</figcaption>
-          </figure>
-        </div>
-
-        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
-          <figure class="gallery-item text-center">
-            <img src="img/DSC00049.jpg" class="img-fluid w-100" alt="Barista sedang membuat kopi">
-            <figcaption class="mt-2 text-white fw-bold"></figcaption>
-            <figcaption class="text-white-50 small">Dedikasi di balik setiap cangkir</figcaption>
-          </figure>
-        </div>
-        
-        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="400">
-          <figure class="gallery-item text-center">
-            <div class="ratio ratio-16x9 rounded-4 overflow-hidden" style="height: 300px;">
-                <iframe width="560" height="315" src="https://www.youtube.com/embed/ArE7k87psC4?si=8Du9I4PFR0wsWRFs" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        <div class="modal-body">
+          <p class="text-center mb-4">Anda harus login terlebih dahulu untuk menggunakan fitur ini.</p>
+          <form id="loginForm">
+            <div class="mb-3">
+              <label for="loginUsername" class="form-label">Username</label>
+              <input type="text" id="loginUsername" class="form-control" required>
             </div>
-          </figure>
+            <div class="mb-3">
+              <label for="loginPassword" class="form-label">Password</label>
+              <input type="password" id="loginPassword" class="form-control" required>
+            </div>
+            <div class="text-end">
+              <button type="submit" class="btn btn-warning">Login</button>
+            </div>
+          </form>
         </div>
-
-        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
-          <figure class="gallery-item text-center">
-            <img src="img/ben coffee(1).png" class="img-fluid w-100" alt="Barista sedang membuat kopi">
-          </figure>
-        </div>
-
-        <div class="col-md-4" data-aos="zoom-in" data-aos-delay="300">
-          <figure class="gallery-item text-center">
-            <img src="img/Brown Retro Vintage Cafe and Restaurant Label Logo.png" class="img-fluid w-100" alt="Barista sedang membuat kopi">
-          </figure>
-        </div>
-        </div>
+      </div>
     </div>
-  </section>
-  <section id="testimonial" class="py-5 bg-light">
-    <div class="container">
-      <h2 class="text-center fw-bold mb-5" data-aos="fade-up">Apa Kata Pelanggan Kami?</h2>
-      <div class="row g-4 justify-content-center">
-        <div class="col-md-4" data-aos="fade-up" data-aos-delay="100">
-          <div class="testimonial-card">
-            <div class="mb-3 text-warning">
-              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
+  </div>
+
+  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
+    <div id="loginSuccessToast" class="toast align-items-center text-white bg-success border-0">
+      <div class="d-flex">
+        <div class="toast-body">
+          ✅ Login berhasil! Selamat datang kembali.
+        </div>
+        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal fade" id="cartModal" tabindex="-1">
+    <div class="modal-dialog modal-lg modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header bg-warning">
+          <h5 class="modal-title">🛒Keranjang Belanja</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <div id="cartItems">
+            <p class="text-center text-muted">Keranjang belanja kosong</p>
+          </div>
+          <div class="mt-3 pt-3 border-top">
+            <div class="d-flex justify-content-between align-items-center">
+              <h5>Total:</h5>
+              <h5 class="text-warning" id="cartTotal">Rp 0</h5>
             </div>
-            <p class="fst-italic">"Tempat ngopi paling nyaman di kota ini! Caramel Breeze-nya juara, pas banget buat kerja sambil santai. Pelayanannya ramah dan cepat."</p>
-            <p class="fw-bold mt-3 mb-0">- Mas Bell.</p>
-            <span class="text-muted small">Pelanggan Tetap</span>
           </div>
         </div>
-
-        <div class="col-md-4" data-aos="fade-up" data-aos-delay="200">
-          <div class="testimonial-card">
-            <div class="mb-3 text-warning">
-              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-half"></i>
-            </div>
-            <p class="fst-italic">"Black Aroma-nya benar-benar bold, kualitas kopinya terasa premium. Suasananya tenang, cocok buat meet-up atau sekadar membaca buku."</p>
-            <p class="fw-bold mt-3 mb-0">- Om Fatur.</p>
-            <span class="text-muted small">Pecinta Kopi Hitam</span>
-          </div>
-        </div>
-
-        <div class="col-md-4" data-aos="fade-up" data-aos-delay="300">
-          <div class="testimonial-card">
-            <div class="mb-3 text-warning">
-              <i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i><i class="bi bi-star-fill"></i>
-            </div>
-            <p class="fst-italic">"Taro Latte-nya enak banget! Gak terlalu manis dan rasanya unik. Plus, ada Croissant Butter yang renyah. Sempurna!"</p>
-            <p class="fw-bold mt-3 mb-0">- Opah Mildan.</p>
-            <span class="text-muted small">Food Blogger</span>
-          </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Lanjut Belanja</button>
+          <button type="button" class="btn btn-warning" id="checkoutBtn">Checkout</button>
         </div>
       </div>
     </div>
-  </section>
-
-  <section id="contact-us" class="py-5">
-    <div class="container text-center" data-aos="fade-up">
-      <h2 class="fw-bold mb-5 text-white">📞 Kontak & Lokasi Kami</h2>
-      
-      <div class="row justify-content-center mb-5">
-        <div class="col-lg-6 mb-4">
-            <p class="lead text-white"><i class="bi bi-geo-alt-fill text-warning"></i> 📍 **Jalan seroja No.15, Ciamis**</p>
-            <p class="lead mb-4 text-white"><i class="bi bi-clock-fill text-warning"></i> Buka Setiap Hari **08.00–22.00**</p>
-            <div class="d-flex justify-content-center flex-wrap gap-4 mb-4">
-                <a href="https://wa.me/08174997982?text=Halo%20Noma%20Coffi%20Bar%2C%20saya%20punya%20pertanyaan." class="btn btn-success btn-lg" target="_blank">
-                    <i class="bi bi-whatsapp"></i> WhatsApp Kami
-                </a>
-                <a href="tel:08174997982" class="btn btn-outline-warning btn-lg text-white"><i class="bi bi-telephone-fill"></i> Telepon</a>
-                <a href="arisaprudin0005@gmail.com" class="btn btn-outline-warning btn-lg text-white"><i class="bi bi-envelope-fill"></i> Email</a>
-            </div>
-
-            <div class="mt-4 social-icons">
-                <h4 class="fw-bold mb-3 text-white">Temukan Kami di Sosial Media</h4>
-                <a href="https://www.instagram.com/noma.coffi.bar" target="_blank" aria-label="Instagram Nōma Coffi Bar"><i class="bi bi-instagram"></i></a>
-                <a href="#" target="_blank" aria-label="Facebook Nōma Coffi Bar"><i class="bi bi-facebook"></i></a>
-                <a href="#" target="_blank" aria-label="Twitter Nōma Coffi Bar"><i class="bi bi-twitter-x"></i></a>
-            </div>
-            
-        </div>
-        
-        <div class="col-lg-8 contact-form-container bg-light" data-aos="fade-up" data-aos-delay="200">
-            <h4 class="fw-bold mb-3">Kirim Pesan Kepada Kami</h4>
-            <form id="contactForm">
-                <div class="mb-3">
-                    <input type="text" class="form-control" placeholder="Nama Anda" required>
-                </div>
-                <div class="mb-3">
-                    <input type="email" class="form-control" placeholder="Email Anda" required>
-                </div>
-                <div class="mb-3">
-                    <textarea class="form-control" rows="3" placeholder="Pesan Anda" required></textarea>
-                </div>
-                <div class="d-grid">
-                    <button type="submit" class="btn btn-warning fw-bold">Kirim Pesan</button>
-                </div>
-            </form>
-        </div>
-      </div>
-      
-      <h4 class="fw-bold mb-3 text-white">Lihat Lokasi Kami di Peta</h4>
-      <div class="ratio ratio-16x9 mt-4 rounded-4 shadow-lg">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d63315.5941496474!2d108.29378652133626!3d-7.328648735599976!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e6f5e82ef269cdf%3A0x401e8f1fc28e1b0!2sCiamis%2C%20Kec.%20Ciamis%2C%20Kabupaten%20Ciamis%2C%20Jawa%20Barat!5e0!3m2!1sid!2sid!4v1761801450191!5m2!1sid!2sid" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
-      </div>
-    </div>
-  </section>
-
-  <section id="orders" class="py-5 bg-light">
-    <div class="container">
-      <h2 class="text-center fw-bold mb-4" data-aos="fade-up">📋 Daftar Pesanan</h2>
-      <div class="table-responsive" id="orderList" data-aos="fade-up">
-        <table class="table table-striped mb-0">
-          <thead class="table-warning">
-            <tr>
-              <th>No</th>
-              <th>Nama Pemesan</th>
-              <th>Menu</th>
-              <th>Jumlah</th>
-              <th>Pesan Tambahan</th>
-              <th>Waktu</th>
-            </tr>
-          </thead>
-          <tbody id="orderTableBody">
-            <tr class="text-center text-muted">
-              <td colspan="6">Belum ada pesanan.</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    <div class="social-icons mb-3">
-        <a href="https://www.instagram.com/noma.coffi.bar" target="_blank" aria-label="Instagram Nōma Coffi Bar"><i class="bi bi-instagram"></i></a>
-        <a href="#" target="_blank" aria-label="Facebook Nōma Coffi Bar"><i class="bi bi-facebook"></i></a>
-        <a href="#" target="_blank" aria-label="Twitter Nōma Coffi Bar"><i class="bi bi-twitter-x"></i></a>
-    </div>
-    <p class="mb-0">© 2025 Nōma Coffi Bar - Dibuat Dengan Sepenuh Rasa.</p>
-  </footer>
+  </div>
 
   <div class="modal fade" id="orderModal" tabindex="-1">
     <div class="modal-dialog modal-dialog-centered">
@@ -521,34 +397,6 @@
     </div>
   </div>
 
-  <div class="whatsapp-float">
-      <a href="https://wa.me/08174997982?text=Halo%20Noma%20Coffi%20Bar" target="_blank">
-          <i class="bi bi-whatsapp"></i>
-      </a>
-  </div>
-
-  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
-    <div id="successToast" class="toast align-items-center text-white bg-success border-0">
-      <div class="d-flex">
-        <div class="toast-body">
-          ✅ Pesanan Anda berhasil dikirim!
-        </div>
-        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-      </div>
-    </div>
-  </div>
-  
-  <div class="position-fixed bottom-0 end-0 p-3" style="z-index: 9999">
-    <div id="contactSuccessToast" class="toast align-items-center text-white bg-info border-0">
-      <div class="d-flex">
-        <div class="toast-body">
-          📧 Pesan Anda berhasil dikirim! Kami akan segera menghubungi Anda.
-        </div>
-        <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
-      </div>
-    </div>
-  </div>
-
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
   <script>
@@ -557,11 +405,231 @@
     const orderModal = document.getElementById('orderModal');
     const orderTable = document.getElementById('orderTableBody');
     let orderCount = 0;
+    let cart = [];
 
+  
+    const filterBtns = document.querySelectorAll('.filter-btn');
+    const menuItems = document.querySelectorAll('.menu-item');
+
+    filterBtns.forEach(btn => {
+      btn.addEventListener('click', () => {
+        const filter = btn.getAttribute('data-filter');
+        
+        
+        filterBtns.forEach(b => b.classList.remove('active'));
+        btn.classList.add('active');
+        
+        
+        menuItems.forEach(item => {
+          if (filter === 'all' || item.getAttribute('data-category') === filter) {
+            item.style.display = 'block';
+          } else {
+            item.style.display = 'none';
+          }
+        });
+      });
+    });
+
+    
+    function updateCart() {
+      const cartCounter = document.getElementById('cartCounter');
+      const cartItems = document.getElementById('cartItems');
+      const cartTotal = document.getElementById('cartTotal');
+      
+      cartCounter.textContent = cart.reduce((sum, item) => sum + item.quantity, 0);
+      
+      if (cart.length === 0) {
+        cartItems.innerHTML = '<p class="text-center text-muted">Keranjang belanja kosong</p>';
+        cartTotal.textContent = 'Rp 0';
+      } else {
+        let html = '';
+        let total = 0;
+        
+        cart.forEach((item, index) => {
+          const subtotal = item.price * item.quantity;
+          total += subtotal;
+          html += `
+            <div class="d-flex justify-content-between align-items-center mb-3 pb-3 border-bottom">
+              <div>
+                <h6 class="mb-1">${item.name}</h6>
+                <small class="text-muted">Rp ${item.price.toLocaleString('id-ID')} x ${item.quantity}</small>
+              </div>
+              <div class="d-flex align-items-center">
+                <span class="me-3 fw-bold">Rp ${subtotal.toLocaleString('id-ID')}</span>
+                <button class="btn btn-sm btn-outline-danger" onclick="removeFromCart(${index})">
+                  <i class="bi bi-trash"></i>
+                </button>
+              </div>
+            </div>
+          `;
+        });
+        
+        cartItems.innerHTML = html;
+        cartTotal.textContent = `Rp ${total.toLocaleString('id-ID')}`;
+      }
+    }
+
+    function removeFromCart(index) {
+      cart.splice(index, 1);
+      updateCart();
+    }
+
+    
+    document.getElementById('checkoutBtn').addEventListener('click', () => {
+      if (cart.length === 0) {
+        alert('Keranjang belanja kosong!');
+        return;
+      }
+      
+      let orderSummary = 'Halo Noma Coffi Bar, saya ingin memesan:\n\n';
+      let total = 0;
+      cart.forEach(item => {
+        const subtotal = item.price * item.quantity;
+        total += subtotal;
+        orderSummary += `${item.name} x ${item.quantity} = Rp ${subtotal.toLocaleString('id-ID')}\n`;
+      });
+      orderSummary += `\nTotal: Rp ${total.toLocaleString('id-ID')}`;
+      
+      const whatsappUrl = `https://wa.me/08174997982?text=${encodeURIComponent(orderSummary)}`;
+      window.open(whatsappUrl, '_blank');
+      
+      
+      cart = [];
+      updateCart();
+      bootstrap.Modal.getInstance(document.getElementById('cartModal')).hide();
+    });
+
+    
+    let isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+    
+    
+    function requireLogin(callback) {
+      if (!isLoggedIn) {
+        const loginModal = new bootstrap.Modal(document.getElementById('loginRequiredModal'));
+        loginModal.show();
+        return false;
+      }
+      if (callback) callback();
+      return true;
+    }
+    
+    
+    document.getElementById('loginForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const username = document.getElementById('loginUsername').value;
+      const password = document.getElementById('loginPassword').value;
+      
+      
+      if (username && password) {
+        localStorage.setItem('isLoggedIn', 'true');
+        localStorage.setItem('username', username);
+        isLoggedIn = true;
+        
+        bootstrap.Modal.getInstance(document.getElementById('loginRequiredModal')).hide();
+        
+        
+        const toast = new bootstrap.Toast(document.getElementById('loginSuccessToast'));
+        toast.show();
+        
+        
+        updateLoginUI();
+        
+        e.target.reset();
+      } else {
+        alert('Silakan masukkan username dan password!');
+      }
+    });
+    
+    
+    document.getElementById('logoutBtn').addEventListener('click', () => {
+      localStorage.removeItem('isLoggedIn');
+      localStorage.removeItem('username');
+      isLoggedIn = false;
+      
+     
+      updateLoginUI();
+      
+     
+      cart = [];
+      updateCart();
+      
+      alert('Anda telah logout!');
+    });
+    
+    
+    function updateLoginUI() {
+      const username = localStorage.getItem('username');
+      if (isLoggedIn && username) {
+        document.getElementById('userDisplay').classList.remove('d-none');
+        document.getElementById('usernameDisplay').textContent = username;
+        document.getElementById('loginBtn').classList.add('d-none');
+      } else {
+        document.getElementById('userDisplay').classList.add('d-none');
+        document.getElementById('loginBtn').classList.remove('d-none');
+      }
+    }
+    
+   
+    document.querySelectorAll('.add-to-cart').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        if (!requireLogin()) {
+          e.preventDefault();
+          return;
+        }
+        
+        const name = btn.getAttribute('data-item');
+        const price = parseInt(btn.getAttribute('data-price'));
+        
+        const existingItem = cart.find(item => item.name === name);
+        if (existingItem) {
+          existingItem.quantity++;
+        } else {
+          cart.push({ name, price, quantity: 1 });
+        }
+        
+        updateCart();
+        
+        btn.textContent = '✓ Ditambahkan';
+        btn.classList.remove('btn-outline-warning');
+        btn.classList.add('btn-success');
+        setTimeout(() => {
+          btn.textContent = 'Keranjang';
+          btn.classList.remove('btn-success');
+          btn.classList.add('btn-outline-warning');
+        }, 1500);
+      });
+    });
+    
+  
+    document.querySelectorAll('.order-direct').forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        if (!requireLogin()) {
+          e.preventDefault();
+          e.stopPropagation();
+          return;
+        }
+      });
+    });
+    
+
+    document.querySelector('.cart-icon').addEventListener('click', (e) => {
+      if (!requireLogin()) {
+        e.preventDefault();
+        e.stopPropagation();
+        return;
+      }
+    });
+    
+   
     orderModal.addEventListener('show.bs.modal', event => {
       const button = event.relatedTarget;
       const item = button.getAttribute('data-item');
-      document.getElementById('menu').value = item || '';
+      
+      if (button.classList.contains('order-direct')) {
+        document.getElementById('menu').value = item || '';
+      } else {
+        document.getElementById('menu').value = item || '';
+      }
     });
 
     document.getElementById('orderForm').addEventListener('submit', e => {
@@ -593,12 +661,9 @@
       e.target.reset();
     });
 
-    document.getElementById('contactForm').addEventListener('submit', e => {
-        e.preventDefault();
-        const toast = new bootstrap.Toast(document.getElementById('contactSuccessToast'));
-        toast.show();
-        e.target.reset();
-    });
+   
+    updateCart();
+    updateLoginUI();
   </script>
 </body>
 </html>
